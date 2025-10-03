@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lalit | Animated Portfolio</title>
 <style>
+  /* ---------- RESET ---------- */
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-  body{height:100%;background:#000;color:#fff;overflow-x:hidden;}
+  body{height:100%;background:#000;color:#fff;overflow-x:hidden;line-height:1.5;}
 
   /* ---------- SPACE BACKGROUND ---------- */
   .space{position:fixed;inset:0;z-index:-100;overflow:hidden;}
-  /* dark cosmic gradient + drifting nebula */
   .cosmic{
     position:absolute;inset:-20%;
     background: radial-gradient(circle at 20% 30%, #3a0a4f, transparent 20%),
@@ -22,10 +22,7 @@
   @keyframes cosmicMove{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 
   /* stars layers */
-  .stars, .stars2, .stars3{
-    position:absolute;inset:0;
-    background-repeat:repeat;
-  }
+  .stars, .stars2, .stars3{position:absolute;inset:0;background-repeat:repeat;}
   .stars{
     background-image: radial-gradient(1px 1px at 5% 10%, #fff, transparent),
                       radial-gradient(1px 1px at 20% 30%, #fff, transparent),
@@ -49,11 +46,7 @@
   @keyframes twinkle{0%{opacity:0.3}50%{opacity:1}100%{opacity:0.3}}
 
   /* floating planets */
-  .planet{
-    position:absolute; border-radius:50%;
-    opacity:0.6; mix-blend-mode:screen;
-    animation: floatPlanet linear infinite;
-  }
+  .planet{position:absolute;border-radius:50%;opacity:0.6;mix-blend-mode:screen;animation: floatPlanet linear infinite;}
   .planet1{width:100px;height:100px;background: radial-gradient(circle,#ff88ff,#8800aa);top:20%;left:15%;animation-duration:90s;}
   .planet2{width:60px;height:60px;background: radial-gradient(circle,#44ffff,#004466);top:50%;left:70%;animation-duration:120s;}
   .planet3{width:80px;height:80px;background: radial-gradient(circle,#ffff44,#666600);top:75%;left:40%;animation-duration:100s;}
@@ -71,21 +64,34 @@
 
   /* ---------- HERO ---------- */
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;padding:40px 6%;}
+  
+  /* Pop-up bounce animation */
   .hero h1{
-    font-size:4rem; background: linear-gradient(90deg,#4efcff,#ff4ecd,#ffe44e);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    animation: glowPulse 2s infinite alternate;
+    font-size:4rem; 
+    background: linear-gradient(90deg,#4efcff,#ff4ecd,#ffe44e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: popUp 1.5s cubic-bezier(0.68,-0.55,0.27,1.55) forwards; /* keep final state */
+    opacity:0;
   }
-  @keyframes glowPulse{0%{text-shadow:0 0 10px #4efcff}50%{text-shadow:0 0 25px #ff4ecd}100%{text-shadow:0 0 40px #ffe44e}}
+  @keyframes popUp{
+    0%{transform:scale(0.5);opacity:0;}
+    60%{transform:scale(1.2);opacity:1;}
+    80%{transform:scale(0.95);}
+    100%{transform:scale(1);opacity:1;} /* stays visible */
+  }
+
   .hero p{margin-top:15px;font-size:1.3rem;opacity:0;animation:fadeUp 2s forwards 1s;}
   @keyframes fadeUp{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
+
   .btn{display:inline-block;margin-top:20px;padding:12px 32px;border-radius:30px;font-weight:bold;text-decoration:none;background: linear-gradient(90deg,#4efcff,#ff4ecd,#ffe44e);color:#111;animation: neonPulse 3s infinite;}
   @keyframes neonPulse{0%{box-shadow:0 0 10px #4efcff}50%{box-shadow:0 0 30px #ff4ecd}100%{box-shadow:0 0 10px #ffe44e}}
 
-  /* ---------- CARDS ---------- */
+  /* ---------- SECTIONS ---------- */
   section{padding:80px 12%;position:relative;}
   section h2{font-size:2.5rem;margin-bottom:25px;background:linear-gradient(90deg,#ff4ecd,#4efcff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;animation:slideIn 2s forwards;}
   @keyframes slideIn{0%{opacity:0;transform:translateX(-60px)}100%{opacity:1;transform:translateX(0)}}
+
   .card{background: rgba(255,255,255,0.08);backdrop-filter: blur(12px);padding:25px;border-radius:20px;margin:25px 0;transition: transform .4s, box-shadow .4s;}
   .card:hover{transform:translateY(-15px) scale(1.02);box-shadow:0 0 30px rgba(78,252,255,0.5);}
 
